@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 
 import logo from '../logo.svg';
 
-export const Register = () => {
+export const Register = ({goTo}) => {
 
   const formik = useFormik({
     initialValues: {
@@ -82,6 +82,8 @@ export const Register = () => {
         </div>
         
         <button type="submit" className="btn btn-primary btn-lg"> Register </button>
+
+        <button className="btn btn-link" onClick={() => goTo('Login')}> Goto Login </button>
       </form>
     </main>
   )

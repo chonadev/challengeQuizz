@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ErrorMessage, useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import logo from '../logo.svg';
 
-export const Login = () => {
+export const Login = ({goTo}) => {
 
   const formik = useFormik({
     initialValues: {
@@ -65,6 +65,7 @@ export const Login = () => {
           <label className="form-check-label" htmlFor="remembercheck"> Remember email </label>
         </div>
 
+        <button type="submit" className="btn btn-link" onClick={() => goTo('Register')}> Registrarse </button>
         <button type="submit" className="btn btn-primary btn-lg">Submit</button>
 
       </form>
