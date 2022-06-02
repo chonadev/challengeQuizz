@@ -3,8 +3,10 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import logo from '../logo.svg';
+import { fetchRegister } from '../services/AuthService';
+import { Link } from 'react-router-dom';
 
-export const Register = ({goTo}) => {
+export const Register = () => {
 
   const formik = useFormik({
     initialValues: {
@@ -25,6 +27,15 @@ export const Register = ({goTo}) => {
     }),
     onSubmit: values => {
       alert(JSON.stringify(values, null, 2));
+      const userData = {
+        "firstName": values.firstName,
+        "lastName":"hardcode",
+        "email": values.email,
+        "password": values.password
+      };
+      fetchRegister(userData).then( res => {
+        console.log("Res register", res);
+      });
     },
   });
 
@@ -83,7 +94,8 @@ export const Register = ({goTo}) => {
         
         <button type="submit" className="btn btn-primary btn-lg"> Register </button>
 
-        <button className="btn btn-link" onClick={() => goTo('Login')}> Goto Login </button>
+        <Link className="btn btn-link" to="/login"> Goto Login </Link>
+
       </form>
     </main>
   )

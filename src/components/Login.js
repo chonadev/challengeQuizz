@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { ErrorMessage, useFormik } from 'formik';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import logo from '../logo.svg';
+import { fetchLogin } from '../services/AuthService';
 
-export const Login = ({goTo}) => {
+export const Login = () => {
 
   const formik = useFormik({
     initialValues: {
@@ -19,6 +21,13 @@ export const Login = ({goTo}) => {
     }),
     onSubmit: values => {
       alert(JSON.stringify(values, null, 2));
+      const credentials = {
+        email: values.email,
+        password: values.password
+      };
+      fetchLogin(credentials).then( res => {
+        console.log("Res login", res);
+      });
     },
   });
 
@@ -65,8 +74,11 @@ export const Login = ({goTo}) => {
           <label className="form-check-label" htmlFor="remembercheck"> Remember email </label>
         </div>
 
-        <button type="submit" className="btn btn-link" onClick={() => goTo('Register')}> Registrarse </button>
-        <button type="submit" className="btn btn-primary btn-lg">Submit</button>
+        <button type="submit" className="btn btn-primary">Submit</button>
+        
+        <div className="my-3 text-center">
+          Are new ? <Link className="btn btn-link" to="/register"> Register </Link>
+        </div>
 
       </form>
     </main>
