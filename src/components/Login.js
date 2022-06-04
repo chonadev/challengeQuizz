@@ -12,8 +12,8 @@ export const Login = ({setToken}) => {
 
   const formik = useFormik({
     initialValues: {
-      email: 'pepito@gmail.com',
-      password: '123456'
+      email: '',
+      password: ''
     },
     validationSchema: Yup.object({
       email : Yup.string().email('Invalid Email address').required('Required'),
