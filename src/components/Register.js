@@ -94,7 +94,7 @@ export const Register = () => {
         
         <button type="submit" className="btn btn-primary btn-lg"> Register </button>
 
-        <Link className="btn btn-link" to="/login"> Goto Login </Link>
+        <Link className="btn btn-link" to="/"> Goto Login </Link>
 
       </form>
     </main>

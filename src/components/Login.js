@@ -1,17 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import logo from '../logo.svg';
 import { fetchLogin } from '../services/AuthService';
 
-export const Login = () => {
+export const Login = ({setToken}) => {
+
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: ''
+      email: 'pepito@gmail.com',
+      password: '123456'
     },
     validationSchema: Yup.object({
       email : Yup.string().email('Invalid Email address').required('Required'),
@@ -20,13 +22,16 @@ export const Login = () => {
       .required('Required'),
     }),
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
       const credentials = {
         email: values.email,
         password: values.password
       };
       fetchLogin(credentials).then( res => {
-        console.log("Res login", res);
+        if (res && res.token) {
+          setToken(res);
+          navigate('/');
+          window.location.reload();
+        }
       });
     },
   });
